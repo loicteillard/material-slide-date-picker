@@ -117,6 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/dialog_btn_cancel"
+                android:backgroundTint="@color/dialog_background"
                 android:textColor="@color/colorPrimary" />
 
             <Button
@@ -126,6 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin_padding_large"
                 android:text="@string/dialog_btn_ok"
+                android:backgroundTint="@color/dialog_background"
                 android:textColor="@color/colorPrimary" />
 
         </LinearLayout>

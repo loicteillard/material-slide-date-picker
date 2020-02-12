@@ -106,6 +106,7 @@ class SlideDatePickerDialog : DialogFragment() {
     private var showYear = true
     private var cancelText = ""
     private var confirmText = ""
+    private var populated = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -266,12 +267,9 @@ class SlideDatePickerDialog : DialogFragment() {
             dayAdapter.notifyDataSetChanged()
             viewModel.getCurrentDay().value?.let { day ->
                 val currentDayPosition = dayAdapter.getPositionByValue(day)
-                recyclerViewDay.alpha = 0f
-                recyclerViewDay.animate().alpha(1f).apply {
-                    duration = 200
-                }.start()
                 recyclerViewDay.scrollToPosition(currentDayPosition)
-                recyclerViewDay.smoothScrollToPosition(currentDayPosition)
+                if (!populated) recyclerViewDay.smoothScrollToPosition(currentDayPosition)
+                populated = true
             }
         })
 
@@ -280,12 +278,8 @@ class SlideDatePickerDialog : DialogFragment() {
             monthAdapter.notifyDataSetChanged()
             viewModel.getCurrentMonth().value?.let { month ->
                 val currentMonthPosition = monthAdapter.getPositionByValue(month)
-                recyclerViewMonth.alpha = 0f
-                recyclerViewMonth.animate().alpha(1f).apply {
-                    duration = 200
-                }.start()
                 recyclerViewMonth.scrollToPosition(currentMonthPosition)
-                recyclerViewMonth.smoothScrollToPosition(currentMonthPosition)
+                if (!populated) recyclerViewMonth.smoothScrollToPosition(currentMonthPosition)
             }
         })
 
@@ -295,7 +289,7 @@ class SlideDatePickerDialog : DialogFragment() {
             viewModel.getCurrentYear().value?.let { year ->
                 val currentYearPosition = yearAdapter.getPositionByValue(year)
                 recyclerViewYear.scrollToPosition(currentYearPosition)
-                recyclerViewYear.smoothScrollToPosition(currentYearPosition)
+                if (!populated) recyclerViewYear.smoothScrollToPosition(currentYearPosition)
             }
         })
 
